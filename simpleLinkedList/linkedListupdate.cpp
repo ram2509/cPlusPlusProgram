@@ -14,6 +14,25 @@ public :
     };
 };
 
+///display the linkedList
+void display(node* head){
+   while(head!=NULL){
+      cout<<head->data<<"=>";
+      head = head->next;
+   };
+};
+
+
+///length of linkedList
+int linkedListLength(node* head){
+    int length = 0;
+    while(head!=NULL){
+        length++;
+        head = head->next;
+    }
+    return length;
+}
+
 ///insert node at front of the linkedList
 void insertNodeAtFront(node*& head, int data){
     ///check node are exit are not
@@ -33,6 +52,7 @@ void insertNodeAtPosition(node*& head, int data,int position){
      ///base case
      if(position==1){
         insertNodeAtFront(head,data);
+        return;
      }
 
      ///in other case
@@ -44,8 +64,14 @@ void insertNodeAtPosition(node*& head, int data,int position){
      node* n = new node(data);
      n->next = temp->next;
      temp->next = n;
+      //display(head);
+     };
+}
 
-     }
+///insert at tail of the node
+void insertNodeAtTail(node*& head,int data){
+        insertNodeAtPosition(head,data,linkedListLength(head)+1);
+        //display(head);
 }
 
 ///take input insert at position i
@@ -57,7 +83,17 @@ void takeInputInsertAtPositionI(node*& head){
      cout<<"Input the data which are insert at position"<<" "<<position<<endl;
      cin>>data;
      insertNodeAtPosition(head,data,position);
+};
+
+void takeInputInsertAtTail(node*& head){
+    int data;
+    cout<<"Enter the value of node"<<endl;
+    cin>>data;
+    insertNodeAtTail(head,data);
 }
+
+
+
 
 ///take the input for linkedList
 void takeInput(node*& head){
@@ -70,23 +106,10 @@ void takeInput(node*& head){
    };
 };
 
-///display the linkedList
-void display(node* head){
-   while(head!=NULL){
-      cout<<head->data<<"=>";
-      head = head->next;
-   };
-};
 
-///length of linkedList
-int linkedListLength(node* head){
-    int length = 0;
-    while(head!=NULL){
-        length++;
-        head = head->next;
-    }
-    return length;
-}
+
+
+
 
 
 int main(){
@@ -96,7 +119,18 @@ int main(){
    // display(head);
     cout<<endl;
     cout<<"Length of linkedList is"<<linkedListLength(head)<<endl;
+    int choice;
+    cout<<"Enter 1 for insert the node at tail & enter 0 for insert the node at position i"<<endl;
+    cin>>choice;
+    if(choice==1){
+        takeInputInsertAtTail(head);
+    }
+    else if(choice==0){
     takeInputInsertAtPositionI(head);
+    }
+    else{
+        cout<<"You Enter wrong Input"<<endl;
+    }
     display(head);
     return 0;
 }
