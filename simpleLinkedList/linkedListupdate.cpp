@@ -106,7 +106,19 @@ void takeInput(node*& head){
    };
 };
 
+///Search Element - using recursion
+node* searchElement(node* head,int key){
+     ///base case
+     if(head==NULL){
+        return NULL;
+     }
 
+     if(head->data==key){
+        return head;
+     }
+
+     return searchElement(head->next,key);
+}
 
 
 
@@ -132,6 +144,12 @@ int main(){
         cout<<"You Enter wrong Input"<<endl;
     }
     display(head);
+    cout<<endl;
+    ///search element in linkedList
+    cout<<"Enter key to search in the linkedList"<<endl;
+    int key;
+    cin>>key;
+    cout<<"Key present at address"<<" "<<searchElement(head,key);
     return 0;
 }
 
