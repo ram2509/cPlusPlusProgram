@@ -119,7 +119,15 @@ node* searchElement(node* head,int key){
 
      return searchElement(head->next,key);
 }
-
+///search Element -using iterative
+node* searchElementIterative(node* head, int key){
+    while(head!=NULL){
+        if(head->data==key){
+            return head;
+        }
+        head=head->next;
+    }
+}
 
 
 
@@ -150,6 +158,7 @@ int main(){
     int key;
     cin>>key;
     cout<<"Key present at address"<<" "<<searchElement(head,key);
+    cout<<"Key present at address"<<" "<<searchElementIterative(head,key);
     return 0;
 }
 
