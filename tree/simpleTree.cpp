@@ -27,6 +27,8 @@ public :
     n->right = buildTree();
     return n;
 }*/
+
+///build tree by iterative method
 void buildIterativeTree(node*& root){
    int data;
    cin>>data;
@@ -146,6 +148,28 @@ int height(node* root){
    return 1 + max(height(root->left),height(root->right));
 }
 
+///find the max sum
+class mySum{
+  public:
+   int inc;
+   int exc;
+};
+
+mySum maxsum(node *root){
+     mySum p;
+     if(root==NULL){
+        p.inc=0;
+        p.exc=0;
+        return p;
+     }
+   mySum left = maxsum(root->left);
+   mySum right = maxsum(root->right);
+
+   p.inc = root->data + left.exc + right.exc;
+   p.exc = max(left.inc,left.exc) + max(right.inc,right.exc);
+   return p;
+}
+
 int main(){
   node* root = NULL;
   buildIterativeTree(root);
@@ -168,6 +192,10 @@ int main(){
   cout<<"Height of tree is"<<" "<<height(root);
   cout<<endl;
   cout<<"Number of node is"<<" "<<countNode(root);
+  cout<<"Max sum of subSets"<<endl;
+  mySum P = maxsum(root);
+  int maxSum = max(P.inc,P.exc);
+  cout<<maxSum<<endl;
   return 0;
 }
 
