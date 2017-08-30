@@ -16,7 +16,7 @@ public :
 };
 
 ///build tree
-node* buildTree(){
+/*node* buildTree(){
     int data;
     cin>>data;
     if(data==-1){
@@ -26,6 +26,32 @@ node* buildTree(){
     n->left = buildTree();
     n->right = buildTree();
     return n;
+}*/
+void buildIterativeTree(node*& root){
+   int data;
+   cin>>data;
+   ///base case
+   root = new node(data);
+
+   ///iterative case
+   queue<node*>q;
+   q.push(root);
+   while(!q.empty()){
+      node *f = q.front();
+      q.pop();
+      int c1,c2;
+      cout<<"Enter the Children of"<<f->data<<" ";
+      cin>>c1>>c2;
+      if(c1!=-1){
+        f->left = new node(c1);
+        q.push(f->left);
+      }
+
+      if(c2!=-1){
+        f->right = new node(c2);
+        q.push(f->right);
+      }
+   }
 }
 
 ///display the tree or Preorder traversal
@@ -122,7 +148,7 @@ int height(node* root){
 
 int main(){
   node* root = NULL;
-  root = buildTree();
+  buildIterativeTree(root);
   cout<<"Root element of tree is"<<" "<<root->data<<endl;
   cout<<"Preorder traversal of tree is"<<endl;
   preorder(root);
